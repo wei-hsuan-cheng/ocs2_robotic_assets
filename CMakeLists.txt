@@ -24,5 +24,6 @@ install(DIRECTORY "${GENERATED_INCLUDE_DIR}/" DESTINATION include/${PROJECT_NAME
 
 install(DIRECTORY resources DESTINATION share/${PROJECT_NAME})
 
-ament_export_include_directories("${GENERATED_INCLUDE_PARENT}" "include")
+# Export only install-time includes to avoid leaking build paths into dependent workspaces.
+ament_export_include_directories("include")
 ament_package()
