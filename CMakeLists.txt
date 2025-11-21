@@ -8,7 +8,8 @@ find_package(ament_cmake REQUIRED)
 ###########
 
 # Generate the header in the build tree so the source remains read-only safe.
-set(GENERATED_INCLUDE_DIR "${CMAKE_CURRENT_BINARY_DIR}/include/${PROJECT_NAME}")
+set(GENERATED_INCLUDE_PARENT "${CMAKE_CURRENT_BINARY_DIR}/include")
+set(GENERATED_INCLUDE_DIR "${GENERATED_INCLUDE_PARENT}/${PROJECT_NAME}")
 file(MAKE_DIRECTORY "${GENERATED_INCLUDE_DIR}")
 configure_file(
   "${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}/package_path.h.in"
@@ -23,5 +24,5 @@ install(DIRECTORY "${GENERATED_INCLUDE_DIR}/" DESTINATION include/${PROJECT_NAME
 
 install(DIRECTORY resources DESTINATION share/${PROJECT_NAME})
 
-ament_export_include_directories("${GENERATED_INCLUDE_DIR}")
+ament_export_include_directories("${GENERATED_INCLUDE_PARENT}" "include")
 ament_package()
